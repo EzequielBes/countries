@@ -74,9 +74,9 @@ const CountryDetail = ({ params }: CountryDetailProps) => {
   };
 
   return (
-    <div className="p-8 bg-gray-100 rounded-lg shadow-md">
+    <div className="p-8 bg-white rounded-lg shadow-md">
       <h2 className="text-3xl font-bold text-center text-blue-700">{country.name}</h2>
-      <p className="text-center text-gray-600">Details about {country.name}</p>
+      <p className="text-center text-gray-600">Details about {country.population.country}</p>
       
       <div className="mt-8 bg-white p-6 rounded-lg shadow-lg">
         <h3 className="text-xl font-semibold text-blue-600">General Information:</h3>
@@ -98,8 +98,8 @@ const CountryDetail = ({ params }: CountryDetailProps) => {
           <ul className="list-disc pl-5">
             {borders.map((border: any) => (
               <li key={border.countryCode} className="text-gray-700 flex gap-2">
-                <img src={border.flag} className="w-4"/>
-                <strong>{border.commonName}</strong> ({border.officialName}) - Population: {border.population?.value}
+                <img src={border.flag} className="w-5 h-4" />
+                <strong>{border.commonName}</strong> ({border.officialName})
               </li>
             ))}
           </ul>

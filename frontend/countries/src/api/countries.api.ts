@@ -1,7 +1,8 @@
 import axios from "axios";
+require('dotenv').config()
 
 const baseUrl = axios.create({
-    baseURL: process.env.API_URL,
+    baseURL: process.env.NEXT_PUBLIC_API,
     timeout: 10000, 
     headers: {
         "Content-Type": "application/json",
@@ -10,7 +11,7 @@ const baseUrl = axios.create({
 
 export const getAllCountries = async () => {
     try {
-        const response = await baseUrl.get("http://localhost:3001/getAllCountries");
+        const response = await baseUrl.get("/getAllCountries");
         console.log(response)
         return response.data;
     } catch (error) {
@@ -21,7 +22,7 @@ export const getAllCountries = async () => {
 
 export const getInformationsCountry = async (countryCode: string) => {
     try {
-      const response = await baseUrl.get(`http://localhost:3001/countryInfo`, {
+      const response = await baseUrl.get(`/countryInfo`, {
         params: { countryCode }, 
       });
   
