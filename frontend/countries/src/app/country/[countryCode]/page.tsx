@@ -37,9 +37,19 @@ const CountryDetail = ({ params }: CountryDetailProps) => {
   useEffect(() => {
     if (countryCode) {
       const fetchCountryData = async () => {
-        console.log("Fetching data for:", countryCode);
-        const data = await getInformationsCountry(countryCode);
-        setCountryData(data);
+        try {
+          console.log("Fetching data for:", countryCode);
+          const data = await getInformationsCountry(countryCode);
+
+          if (!data || !data.country) {
+            throw new Error("No data available for this country.");
+          }
+
+          setCountryData(data);
+        } catch (error: any) {
+          console.error("Failed to fetch country data:", error.message);
+          setErrorMessage("Unable to load data for this country.");
+        }
       };
       fetchCountryData();
     }
@@ -55,23 +65,27 @@ const CountryDetail = ({ params }: CountryDetailProps) => {
 
   const { country, borders } = countryData;
 
-  const populationData = country?.population?.populationCounts.map((pop: any) => ({
+  const populationData = country?.population?.populationCounts?.map((pop: any) => ({
     year: pop.year,
     value: pop.value,
   }));
-  
-  const chartData = {
-    labels: populationData?.map((data: any) => data.year),
-    datasets: [
-      {
-        label: `Population of ${country.code}`,
-        data: populationData?.map((data: any) => data.value),
-        borderColor: "rgba(75,192,192,1)",
-        backgroundColor: "rgba(75,192,192,0.2)",
-        fill: true,
-      },
-    ],
-  };
+
+  const hasPopulationData = populationData && populationData.length > 0;
+
+  const chartData = hasPopulationData
+    ? {
+        labels: populationData.map((data: any) => data.year),
+        datasets: [
+          {
+            label: `Population of ${country?.code || "Unknown"}`,
+            data: populationData.map((data: any) => data.value),
+            borderColor: "rgba(75,192,192,1)",
+            backgroundColor: "rgba(75,192,192,0.2)",
+            fill: true,
+          },
+        ],
+      }
+    : null;
 
   return (
     <div className="p-8 bg-white rounded-lg shadow-md">
@@ -89,7 +103,14 @@ const CountryDetail = ({ params }: CountryDetailProps) => {
 
       <div className="mt-8 bg-white p-6 rounded-lg shadow-lg">
         <h3 className="text-xl font-semibold text-blue-600">Population Growth:</h3>
-        <Line data={chartData} />
+        {chartData &&
+          <Line data={chartData} />
+        }
+
+      {!chartData &&
+          <h1>Population not found</h1>
+        }
+        
       </div>
 
       <div className="mt-8 bg-white p-6 rounded-lg shadow-lg">
@@ -112,3 +133,7 @@ const CountryDetail = ({ params }: CountryDetailProps) => {
 };
 
 export default CountryDetail;
+function setErrorMessage(arg0: string) {
+  throw new Error("Function not implemented.");
+}
+
