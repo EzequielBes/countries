@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [countries, setCountries] = useState<any[]>([]); 
-  const [countryName, setCountryName] = useState(''); 
   const [loading, setLoading] = useState(false); 
   const router = useRouter();
 
@@ -21,10 +20,6 @@ export default function Home() {
     fetchCountries();
   }, []);
 
- 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
 
   const handleCountryClick = (countryCode: string) => {
     router.push(`/country/${countryCode}`); 
@@ -39,7 +34,7 @@ export default function Home() {
 
       <main className="p-8 pt-32 sm:pt-40">
         {loading ? (
-          <p className="text-white">Carregando...</p>
+          <p className="text-white">Loading ...</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {countries.map((item: { name: string, countryCode: string }) => (

@@ -1,10 +1,6 @@
 import React from 'react';
 import Flag from 'react-world-flags';
 
-type CountryData = {
-  year: number;
-  value: number;
-};
 
 interface CountryProps {
   name: string;

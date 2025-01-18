@@ -1,2 +1,5 @@
+backend npm install
+front-end countries npm install
 backend -> yarn run start or npm run start
+frontend - yarn run dev or npm run dev
 frontend - yarn run dev or npm run dev
