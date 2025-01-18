@@ -16,7 +16,6 @@ export class CountryUseCases {
             const country = await getCountryInfo(countryCode);
             const flagsData = await getCountriesFlags();
     
-            // Recuperando a bandeira do país principal
             const countryFlag = flagsData.data.find((item: any) => item.country === country.name)?.flag;
     
             const countryPopulationData = populationData.data.find((item: any) => item.country === country.commonName);
@@ -37,7 +36,7 @@ export class CountryUseCases {
                     code: countryCode,
                     flag: countryFlag,
                     info: country.info,
-                    population: countryPopulationData || "No population data available",  // Incluindo dados populacionais do país principal
+                    population: countryPopulationData || "No population data available",
                 },
                 borders: countriesWithFlagsAndPopulation,
             };
