@@ -55,7 +55,7 @@ const CountryDetail = ({ params }: CountryDetailProps) => {
 
   const { country, borders } = countryData;
 
-  const populationData = borders?.population?.populationCounts.map((pop: any) => ({
+  const populationData = country?.population?.populationCounts.map((pop: any) => ({
     year: pop.year,
     value: pop.value,
   }));
