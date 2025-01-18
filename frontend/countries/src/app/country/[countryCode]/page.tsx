@@ -64,7 +64,7 @@ const CountryDetail = ({ params }: CountryDetailProps) => {
     labels: populationData?.map((data: any) => data.year),
     datasets: [
       {
-        label: `Population of ${country.name}`,
+        label: `Population of ${country.code}`,
         data: populationData?.map((data: any) => data.value),
         borderColor: "rgba(75,192,192,1)",
         backgroundColor: "rgba(75,192,192,0.2)",
