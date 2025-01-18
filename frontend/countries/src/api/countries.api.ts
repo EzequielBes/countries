@@ -1,9 +1,10 @@
-import axios from "axios";
-require('dotenv').config()
+
+
+  import axios from "axios";
 
 const baseUrl = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API,
-    timeout: 10000, 
+    timeout: 10000,
     headers: {
         "Content-Type": "application/json",
     },
@@ -12,24 +13,24 @@ const baseUrl = axios.create({
 export const getAllCountries = async () => {
     try {
         const response = await baseUrl.get("/getAllCountries");
-        console.log(response)
+        console.log(response);
         return response.data;
     } catch (error) {
-        console.error("Erro ao buscar os países disponíveis:", error);
+        console.error("Error fetching available countries:", error);
         throw error;
     }
 };
 
 export const getInformationsCountry = async (countryCode: string) => {
     try {
-      const response = await baseUrl.get(`/countryInfo`, {
-        params: { countryCode }, 
-      });
-  
-      console.log(response);
-      return response.data;
+        const response = await baseUrl.get(`/countryInfo`, {
+            params: { countryCode },
+        });
+
+        console.log(response);
+        return response.data;
     } catch (error) {
-      console.error("Erro ao buscar as informações do país:", error);
-      throw error;
+        console.error("Error fetching country information:", error);
+        throw error;
     }
-  };
+};
