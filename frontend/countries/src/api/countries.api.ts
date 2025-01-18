@@ -13,7 +13,6 @@ const baseUrl = axios.create({
 export const getAllCountries = async () => {
     try {
         const response = await baseUrl.get("/getAllCountries");
-        console.log(response);
         return response.data;
     } catch (error) {
         console.error("Error fetching available countries:", error);
@@ -27,7 +26,6 @@ export const getInformationsCountry = async (countryCode: string) => {
             params: { countryCode },
         });
 
-        console.log(response);
         return response.data;
     } catch (error) {
         console.error("Error fetching country information:", error);
